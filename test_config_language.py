@@ -23,23 +23,33 @@ class TestConfigLanguage(unittest.TestCase):
         output = self.config_lang.parse_json(json_data)
         self.assertEqual(output, expected_output)
 
-    def test_variable_declaration(self):
+    def test_functions(self):
         json_data = {
-            "var1": 100,
-            "var2": 200
+            "var1": 2,
+            "var2": 1,
+            "var3": "[^max(var1, var2)]",
+            "var4": "[^sqrt(var1)]"
         }
         expected_output = (
-            "var var1 = 100\n"
-            "var var2 = 200\n"
+            "var var1 = 2\n"
+            "var var2 = 1\n"
+            "var var3 = 2\n"
+            "var var4 = 1.4142135623730951\n"
         )
         output = self.config_lang.parse_json(json_data)
         self.assertEqual(output, expected_output)
 
-    def test_expression_evaluation(self):
+    def test_arithmetic_operation(self):
         json_data = {
-            "constant": "[^10 + 5]"
+            "a": "[^10 + 25 - 3 * 5]",
+            "b": "[^a * 2 - 15]",
+            "c": "[^a + b + 5 - 20 * 7]"
         }
-        expected_output = "var constant = 15\n"
+        expected_output = (
+            "var a = 20\n"
+            "var b = 25\n"
+            "var c = -90\n"
+        )
         output = self.config_lang.parse_json(json_data)
         self.assertEqual(output, expected_output)
 

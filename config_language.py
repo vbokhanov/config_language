@@ -31,9 +31,10 @@ class ConfigLanguage:
 
     def evaluate_expression(self, expr):
         expr = expr.strip()
+        int_variables = {key: int(value) for key, value in self.variables.items()}
         try:
-            allowed_globals = {"__builtins__": None, "math": math, "max": max}
-            result = eval(expr, allowed_globals, self.variables)
+            allowed_globals = {"__builtins__": None, "math": math, "max": max, "sqrt": math.sqrt}
+            result = eval(expr, allowed_globals, int_variables)
             return str(result)
         except Exception as e:
             raise ValueError(f"Error evaluating expression: {expr} ({e})")
