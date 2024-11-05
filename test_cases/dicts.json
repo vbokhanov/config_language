@@ -1,0 +1,15 @@
+{
+    "settings": {
+        "width": 800,
+        "height": 600,
+        "fullscreen": "False",
+        "inner_setting": {
+            "timer": 100,
+            "brightness": {
+                "with_backlight": 1000,
+                "without_backlight": 450
+            }
+        }
+    }
+}
+

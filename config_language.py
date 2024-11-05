@@ -7,9 +7,9 @@ class ConfigLanguage:
     def __init__(self):
         self.variables = {}
 
-    def parse_value(self, value):
+    def parse_value(self, value, level=0):
         if isinstance(value, dict):
-            return self.convert_dict(value, level=1)
+            return self.convert_dict(value, level)
         elif isinstance(value, (int, float)):
             return str(value)
         elif isinstance(value, str) and re.match(r"\[\^.*\]", value):
@@ -25,7 +25,10 @@ class ConfigLanguage:
         for key, value in data.items():
             if not re.match(r"^[_A-Za-z][_a-zA-Z0-9]*$", key):
                 raise ValueError(f"Invalid variable name: {key}")
-            result += f"{indent}{key} = {self.parse_value(value)}\n"
+            if isinstance(value, dict):
+                result += f"{indent}{key} = {self.parse_value(value, level + 1)}\n"
+            else:
+                result += f"{indent}var {key} = {self.parse_value(value, level)}\n"
         result += '  ' * (level - 1) + "}"
         return result
 

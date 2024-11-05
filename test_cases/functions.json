@@ -1,0 +1,7 @@
+{
+    "var1": 2,
+    "var2": 1,
+    "var3": "[^max(max(var1, 5), var2)]",
+    "var4": "[^sqrt(var1)]"
+}
+
