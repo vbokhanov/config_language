@@ -21,15 +21,15 @@ class TestConfigLanguage(unittest.TestCase):
             }
         }
         expected_output = (
-            "settings = {\n"
-            "  var width = 800\n"
-            "  var height = 600\n"
-            "  var fullscreen = False\n"
+            "var settings = {\n"
+            "  width = 800\n"
+            "  height = 600\n"
+            "  fullscreen = False\n"
             "  inner_setting = {\n"
-            "    var timer = 100\n"
+            "    timer = 100\n"
             "    brightness = {\n"
-            "      var with_backlight = 1000\n"
-            "      var without_backlight = 450\n"
+            "      with_backlight = 1000\n"
+            "      without_backlight = 450\n"
             "    }\n"
             "  }\n"
             "}\n"
@@ -66,8 +66,8 @@ class TestConfigLanguage(unittest.TestCase):
             "var a = 20\n"
             "var b = 25\n"
             "var c = -90\n"
-            "d = {\n"
-            "  var e = -45125\n"
+            "var d = {\n"
+            "  e = -45125\n"
             "}\n"
         )
         output = self.config_lang.parse_json(json_data)

@@ -28,7 +28,7 @@ class ConfigLanguage:
             if isinstance(value, dict):
                 result += f"{indent}{key} = {self.parse_value(value, level + 1)}\n"
             else:
-                result += f"{indent}var {key} = {self.parse_value(value, level)}\n"
+                result += f"{indent}{key} = {self.parse_value(value, level)}\n"
         result += '  ' * (level - 1) + "}"
         return result
 
@@ -52,7 +52,7 @@ class ConfigLanguage:
         output = ""
         for key, value in data.items():
             if isinstance(value, dict):
-                output += f"{key} = {self.convert_dict(value)}\n"
+                output += f"var {key} = {self.convert_dict(value)}\n"
             else:
                 output += f"{self.define_variable(key, self.parse_value(value))}\n"
         return output
